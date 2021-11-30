@@ -46,15 +46,33 @@ export const actions = {
       })
     }
 
-    const products = []
+    let products = []
 
-    tokenProducts.forEach(async (item) => {
+    // tokenProducts.forEach(async (item) => {
+    //   const prodcutURI = 'https://ipfs.io/ipfs/'
+    //   const genesisIPFSData = await requestAPICall(prodcutURI + item.hash).then(res => {
+    //     // console.log('IPFS Data', res.data)
+    //     return res.data
+    //   })
+    //   products.push({
+    //     hash: item.hash,
+    //     img: genesisIPFSData.image,
+    //     title: genesisIPFSData.name,
+    //     description: genesisIPFSData.description,
+    //     price: item.price,
+    //     quantity: item.quantity,
+    //     isAuction: false
+    //   })
+    // })
+    
+    await Promise.all(tokenProducts.map(async item => {
       const prodcutURI = 'https://ipfs.io/ipfs/'
       const genesisIPFSData = await requestAPICall(prodcutURI + item.hash).then(res => {
         // console.log('IPFS Data', res.data)
         return res.data
       })
-      products.push({
+  
+      products = [ ...products, {
         hash: item.hash,
         img: genesisIPFSData.image,
         title: genesisIPFSData.name,
@@ -62,8 +80,8 @@ export const actions = {
         price: item.price,
         quantity: item.quantity,
         isAuction: false
-      })
-    })
+      }]
+    }))
 
     // console.log('products', products)
     commit('SET_PRODUCTS', products)
