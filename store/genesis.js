@@ -41,39 +41,42 @@ export const actions = {
     }
 
     const tokens = await makeBatchCall(methods)
-    const genesis = []
+    let genesis = []
 
     tokens.forEach(async (tokenId) => {
       const [tokenURI] = await makeBatchCall([{ methodName: 'tokenURI', args: [tokenId] }])
+      console.log([tokenURI], "tokenURK")
       const genesisIPFSData = await requestAPICall(tokenURI).then(res => {
         // console.log('IPFS Data', res.data)
         return res.data
       })
-      genesis.push({
+      genesis = [...genesis, {
         id: tokenId,
         img: genesisIPFSData.image,
         title: genesisIPFSData.name,
         description: genesisIPFSData.description,
         selected: false
-      })
+      }]
     })
     commit('SET_GENESIS', genesis)
   },
 
   async getNFTs ({ commit }, owner) {
     const allContracts = await requestAPICall(`${scanURL}api?module=account&action=tokennfttx&address=${owner}&startblock=0&endblock=999999999&sort=asc&apikey=8RJ5P3R8V9YYUPTU1NWA8R4FE5Q17VFY13`).then(res => {
-      // console.log('All Tnx Data: ', res.data)
-      const contracts = []
+      console.log('All Tnx Data: ', res.data)
+      let contracts = []
       res.data.result.forEach(element => {
         if (!contracts.includes(element.contractAddress)) {
-          contracts.push(element.contractAddress)
+          contracts = [...contracts, element.contractAddress]
         }
       })
       return contracts
     })
     // console.log('All Contract Addresses: ', allContracts)
-    const genesis = []
-    allContracts.forEach(async element => {
+    let genesis = []
+    
+    await Promise.all(allContracts.map(async element => {
+
       // console.log('contract address: ', element)
       const [balance] = await nftGeneralBatchCall([{ methodName: 'balanceOf', args: [owner] }], element)
       if (balance < 1) {
@@ -93,16 +96,17 @@ export const actions = {
           // console.log('IPFS Data', res.data)
           return res.data
         })
-        genesis.push({
+        genesis = [...genesis, {
           id: tokenId,
           img: genesisIPFSData.image,
           title: genesisIPFSData.name,
           description: genesisIPFSData.description,
           selected: false,
           contractAddress: element
-        })
+        }]
       })
-    })
+    }))
+
     commit('SET_GENESIS', genesis)
   },
 
