@@ -42,8 +42,7 @@ export const actions = {
 
     const tokens = await makeBatchCall(methods)
     let genesis = []
-
-    tokens.forEach(async (tokenId) => {
+    await Promise.all(tokens.map(async (tokenId) => {
       const [tokenURI] = await makeBatchCall([{ methodName: 'tokenURI', args: [tokenId] }])
       console.log([tokenURI], "tokenURK")
       const genesisIPFSData = await requestAPICall(tokenURI).then(res => {
@@ -57,7 +56,7 @@ export const actions = {
         description: genesisIPFSData.description,
         selected: false
       }]
-    })
+    }))
     commit('SET_GENESIS', genesis)
   },
 
