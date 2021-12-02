@@ -44,7 +44,6 @@ export const actions = {
     let genesis = []
     await Promise.all(tokens.map(async (tokenId) => {
       const [tokenURI] = await makeBatchCall([{ methodName: 'tokenURI', args: [tokenId] }])
-      console.log([tokenURI], "tokenURK")
       const genesisIPFSData = await requestAPICall(tokenURI).then(res => {
         // console.log('IPFS Data', res.data)
         return res.data
@@ -73,7 +72,6 @@ export const actions = {
     })
     // console.log('All Contract Addresses: ', allContracts)
     let genesis = []
-    
     await Promise.all(allContracts.map(async element => {
 
       // console.log('contract address: ', element)

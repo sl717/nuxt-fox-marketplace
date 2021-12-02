@@ -125,7 +125,6 @@ export const actions = {
   },
 
   async buyProduct ({ commit }, payload) {
-    // console.log('buyProduct: ', payload)
     await sendFoxToken('approve', [MarketPlace.address[networkConfig.defaultNetwork], (payload.price * 1000000000).toString()], { from: payload.account }).then(async (res) => {
       if (res !== false) {
         await sendTransaction('buy', [payload.account, payload.hash, (payload.price * 1000000000).toString()], { from: payload.account })
@@ -136,7 +135,6 @@ export const actions = {
   },
 
   async getProduct ({ commit }, payload) {
-    // console.log('getProduct: ', payload)
     const [hashProduct] = await makeBatchCall([{ methodName: 'getProdByHash', args: [payload] }])
     const prodcutURI = 'https://ipfs.io/ipfs/'
     const productIPFSData = await requestAPICall(prodcutURI + payload).then(res => {
@@ -178,12 +176,21 @@ export const actions = {
   },
 
   async setProduct ({ commit }, payload) {
-    const contract = await getContract()
     try {
-      const result = await contract.methods.setProdByHash(payload.name, payload.description, payload.price.toString(), payload.quantity.toString(), payload.hash).call()
-      console.log(result, "hihi")
+      const contract = await getContract()
+      await contract.methods.setProdByHash(payload.name, payload.description, payload.price.toString(), payload.quantity.toString(), payload.hash).call()
     } catch (err) {
       console.log(err)
+    }
+  },
+
+  async removeProduct ({ commit }, payload) {
+    try {
+      const contract = await getContract()
+      await contract.methods.deleteProdByHash(payload.hash).call()
+    } catch (err) {
+      console.log(err)
+      return false
     }
   },
 

@@ -32,16 +32,16 @@
           </div>
           <div class="product-purchase bottom-section">
             <div>
-                <label for=""> Offer Price</label>
-                <b-input type="number" placeholder="0,00" v-model="auctionPrice"></b-input>
+              <label for=""> Offer Price</label>
+              <b-input v-model="auctionPrice" type="number" placeholder="0,00" />
             </div>
             <div class="offer-btns">
-                <button @click="offerProdcut(product.id)">
-                    Send an Offer
-                </button>
-                <button class="go-back" @click="goBack()">
-                    Go Back
-                </button>
+              <button @click="offerProdcut(product.id)">
+                Send an Offer
+              </button>
+              <button class="go-back" @click="goBack()">
+                Go Back
+              </button>
             </div>
           </div>
         </div>
@@ -121,9 +121,9 @@ export default {
       }
       this.showLoading()
       await this.makeOffer({
-        nftAddress: this.product.nftAddress, 
+        nftAddress: this.product.nftAddress,
         id,
-        auctionPrice: this.auctionPrice 
+        auctionPrice: this.auctionPrice
       })
       this.$router.push('/')
       this.closeLoading()

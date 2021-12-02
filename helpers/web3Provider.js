@@ -1,5 +1,6 @@
 /* eslint-disable */
 import networkConfig from '../config/networkConfig'
+import { getContract } from './contractFunctions/productList'
 
 const rightNetworks = networkConfig.rightNetworks
 
@@ -57,6 +58,29 @@ export const enableAccount = async () => {
     console.log('error on connecting account', error)
   }
   return account
+}
+
+
+export const getAdmin = async () => {
+  let admin = null
+  try {
+    const contract = await getContract()
+    admin = await contract.methods.DEFAULT_ADMIN_ROLE().call()
+  } catch (error) {
+    console.log('error on connecting account', error)
+  }
+  return admin.toString()
+}
+
+export const getProduce = async () => {
+  let produce = null
+  try {
+    const contract = await getContract()
+    produce = await contract.methods.PRODUCE_ROLE().call()
+  } catch (error) {
+    console.log('error on connecting account', error)
+  }
+  return produce.toString()
 }
 
 export const isRightNetwork = (networkId) => {
