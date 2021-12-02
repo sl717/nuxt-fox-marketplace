@@ -25,14 +25,14 @@
                 <div class="edit-has-text">
                   <p>Price</p>
                   <div class="edit-text-form">
-                    <el-input v-model="price" type="number" />
+                    <el-input v-model="price" type="number" min="0"/>
                     <p>FOX</p>
                   </div>
                 </div>
                 <div class="edit-has-text">
                   <p>Available</p>
                   <div class="edit-text-form">
-                    <el-input v-model="quantity" type="number" />
+                    <el-input v-model="quantity" type="number" min="0"/>
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
                 </button>
               </div>
               <div v-else>
-                <button class="button edit" @click="edit()">
+                <button class="button edit" @click="save(product.title, product.description, product.hash)">
                   Save
                 </button>
               </div>
@@ -146,7 +146,8 @@ export default {
   mounted () {
   },
   methods: {
-    ...mapActions({ getProduct: 'products/getProduct', buy: 'ethereum/buyProduct' }),
+    ...mapActions({ getProduct: 'products/getProduct', buy: 'ethereum/buyProduct', set: 'products/setProduct' }),
+
     async buyProdcut (hash, price) {
       this.showLoading()
       await this.buy({ price, hash })
@@ -154,8 +155,12 @@ export default {
       this.product = this.productGetter
       this.closeLoading()
     },
-    async save () {
-
+    async save (name, description, hash) {
+      this.showLoading()
+      const price = this.price
+      const quantity = this.quantity
+      await this.set({ name, description, price, quantity, hash })
+      this.closeLoading()
     },
     showLoading () {
       this.loading = this.$loading({
@@ -178,7 +183,6 @@ export default {
     },
     edit () {
       this.isEdited = false
-      console.log(this.price, this.quantity)
     },
     remove () {
       Vue.use(vfmPlugin({
@@ -187,7 +191,6 @@ export default {
         dynamicContainerName: 'ModalsContainer'
       }))
       this.removeAlert = true
-      console.log(this.product.hash)
     }
   }
 }

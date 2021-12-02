@@ -26,3 +26,8 @@ export const getAddress = () => {
     initContractInstance();
     return contractInstance.options.address
 }
+
+export const getContract = async () => {
+  const contract = await new window.web3.eth.Contract(MarketPlace.abi, MarketPlace.address[networkConfig.defaultNetwork])
+  return contract
+}

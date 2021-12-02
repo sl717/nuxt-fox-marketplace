@@ -1,4 +1,4 @@
-import { makeBatchCall, sendTransaction } from '~/helpers/contractFunctions/productList'
+import { getContract, makeBatchCall, sendTransaction } from '~/helpers/contractFunctions/productList'
 import { makeBatchCall as auctionMakeBatchCall } from '~/helpers/contractFunctions/auction'
 import { makeBatchCall as generalNFTMakeBatchCall } from '~/helpers/contractFunctions/nftToken'
 // import { makeBatchCall as genesisNFTMakeBatchCall } from '~/helpers/contractFunctions/genesisNFT'
@@ -45,17 +45,13 @@ export const actions = {
         hash: hashes[i]
       })
     }
-
     let products = []
-    
     await Promise.all(tokenProducts.map(async item => {
       const prodcutURI = 'https://ipfs.io/ipfs/'
       const genesisIPFSData = await requestAPICall(prodcutURI + item.hash).then(res => {
-        // console.log('IPFS Data', res.data)
         return res.data
       })
-  
-      products = [ ...products, {
+      products = [...products, {
         hash: item.hash,
         img: genesisIPFSData.image,
         title: genesisIPFSData.name,
@@ -179,6 +175,16 @@ export const actions = {
       isAuction: true
     }
     commit('SET_PRODUCT', product)
+  },
+
+  async setProduct ({ commit }, payload) {
+    const contract = await getContract()
+    try {
+      const result = await contract.methods.setProdByHash(payload.name, payload.description, payload.price.toString(), payload.quantity.toString(), payload.hash).call()
+      console.log(result, "hihi")
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   async getOffersForAuction ({ commit }, payload) {
