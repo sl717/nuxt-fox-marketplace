@@ -246,10 +246,16 @@ export default {
               background-color: #f9a31b;
               margin-bottom: 10px;
               border-radius: 5px;
+              &:hover {
+                background-color: #d88a0d;
+              }
             }
 
             .go-back{
               background-color: transparent;
+              &:hover {
+                background-color: #ddd;
+              }
             }
 
         }

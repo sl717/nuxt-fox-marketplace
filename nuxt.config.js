@@ -89,6 +89,7 @@ export default {
   plugins: [
     { src: '@/plugins/element-ui', mode: 'client' },
     { src: '@/plugins/bsc.js', mode: 'client' },
+    { src: '@/plugins/vue-final-modal.js', mode: 'client' },
     // '@/plugins/ipfs-plugin'
     '@/plugins/web3'
   ],
@@ -163,7 +164,7 @@ export default {
 	 */
   build: {
     transpile: [/^element-ui/],
-
+    transpile: ['vue-final-modal'],
     extend (config, ctx) {
       config.module.rules.push({
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
