@@ -184,6 +184,17 @@ export const actions = {
     }
   },
 
+  async addProduct ({ commit }, payload) {
+    try {
+      const contract = await getContract()
+      await contract.methods.addNewProduction(payload.name, payload.description, payload.price.toString(), payload.quantity.toString(), payload.hash).call()
+      return true
+    } catch (err) {
+      console.log(err)
+      return false
+    }
+  },
+
   async removeProduct ({ commit }, payload) {
     try {
       const contract = await getContract()
