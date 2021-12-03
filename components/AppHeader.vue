@@ -23,6 +23,13 @@
             >
               <a :href="href" class="navbar-item has-text-white" @click="navigate">Home</a>
             </router-link>
+
+            <router-link
+              v-slot="{ href, navigate }"
+              to="/create"
+            >
+              <a :href="href" class="navbar-item has-text-white" @click="navigate">Create</a>
+            </router-link>
             <!-- <router-link
               v-slot="{ href, navigate }"
               to="/auction"

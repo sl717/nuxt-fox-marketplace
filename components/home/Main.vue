@@ -5,27 +5,28 @@
         <h1 class="title">
           Shop
         </h1>
-        <p class="subtitle">Welcome to the Fox NFT Marketplace Alpha (v0.9)! This is an early release candidate made available for viewing and using by our FOX users. To acquire any of our NFTs, click the Acquire button.</p>
+        <p class="subtitle">
+          Welcome to the Fox NFT Marketplace Alpha (v0.9)! This is an early release candidate made available for viewing and using by our FOX users. To acquire any of our NFTs, click the Acquire button.
+        </p>
         <div class="filter">
           <div class="sort">
             <label for="sort">Sort by: </label>
-            <el-select v-model="value" @change="onChange" placeholder="Select">
+            <el-select v-model="value" placeholder="Select" @change="onChange">
               <el-option
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
-              </el-option>
+                :value="item.value" 
+              />
             </el-select>
           </div>
           <div class="search">
-            <el-input placeholder="Search..." v-model="input"></el-input>
+            <el-input v-model="input" placeholder="Search..." />
           </div>
-          
         </div>
         <div v-if="validProduct" class="nft-fox-product">
           <div v-for="(item, index) in validProduct" :key="index" class="nft-fox-product-item">
-            <ProductItem :productData="item" :buyProduct="onBuyProduct" />
+            <ProductItem :product-data="item" :buy-product="onBuyProduct" />
           </div>
         </div>
       </div>
@@ -61,7 +62,7 @@ export default {
       const filterData = this.productList.filter(i => (i.quantity > 0 || i.isAuction) && (i.title.toLowerCase().includes(this.input.toLowerCase())))
       const sortedData = filterData.sort((a, b) => {
           if (this.value === 'inc') {
-            return a.price - b.price 
+            return a.price - b.price
           } else {
             return b.price - a.price
           }
@@ -78,6 +79,7 @@ export default {
     this.productList = this.productsGetter
     this.loading = false
     loadingComponent.close()
+    console.log(await this.productList[0], 'product list')
   },
   methods: {
     ...mapActions({ getGenesis: 'genesis/getGenesis', getProducts: 'products/getProducts' }),
