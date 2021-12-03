@@ -25,6 +25,7 @@
             </router-link>
 
             <router-link
+              v-if="isAdmin"
               v-slot="{ href, navigate }"
               to="/create"
             >
@@ -79,7 +80,8 @@ export default {
   data () {
     return {
       dialogVisible: false,
-      hideConnectPopup: false
+      hideConnectPopup: false,
+      isAdmin: false
     }
   },
   computed: {
@@ -91,6 +93,13 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
+    if (this.account === '0xb655a92b4dc14a7db2d96872a270659e310b83234a0681f01d1337fa9e026e7a') {
+      this.isAdmin = true
+    } else if (this.account === '0x0000000000000000000000000000000000000000000000000000000000000000') {
+      this.isAdmin = true
+    } else {
+      this.isAdmin = false
+    }
   },
   methods: {
     ...mapActions({ setShowConnectPopup: 'setShowConnectPopup', connectToWallet: 'ethereum/connectToWallet' }),
