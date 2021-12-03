@@ -50,7 +50,7 @@
         <button v-if="isActive" class="save" @click="create()">
           Create
         </button>
-        <button>
+        <button @click="goBack()">
           Go to home
         </button>
       </div>
@@ -103,6 +103,9 @@ export default {
   methods: {
     ...mapActions({ add: 'products/addProduct' }),
 
+    goBack () {
+      this.$router.push('/')
+    },
     getJson () {
       fetch(this.metadata)
       .then(resp =>
