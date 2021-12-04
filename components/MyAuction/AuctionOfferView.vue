@@ -36,33 +36,47 @@
                 <b-input type="number" placeholder="0,00" v-model="auctionPrice"></b-input>
             </div> -->
             <div class="offer-btns">
-                <button @click="cancelAuction(product.nftAddress, product.id)">
-                    Cancel Auction
-                </button>
-                <button class="go-back" @click="goBack()">
-                    Go Back
-                </button>
+              <button @click="cancelAuction(product.nftAddress, product.id)">
+                Cancel Auction
+              </button>
+              <button class="go-back" @click="goBack()">
+                Go Back
+              </button>
             </div>
           </div>
         </div>
       </div>
       <!-- proposal section -->
-      <h2 class="bid-title"> All Bids </h2>
+      <h2 class="bid-title">
+        All Bids
+      </h2>
       <div v-if="offers.length>0" class="offers-containers">
         <div v-for="(row, index) in offers" :key="index" class="proposal-item">
           <div class="proposal-info">
             <div class="proposal-applicant">
-              <p class="proposal-label">Applicant: </p>
-              <p>{{row.applicant}}</p>
+              <p class="proposal-label">
+                Applicant:
+              </p>
+              <p>
+                {{ row.applicant }}
+              </p>
             </div>
             <div class="proposal-price">
-              <p class="proposal-label">Price: </p>
-              <p>{{row.price / 1000000000}}</p>
-              <p class="fox-unit"> FOX </p>
+              <p class="proposal-label">
+                Price:
+              </p>
+              <p>
+                {{ row.price / 1000000000 }}
+              </p>
+              <p class="fox-unit">
+                FOX
+              </p>
             </div>
           </div>
           <div class="accept-btn">
-            <button @click="acceptOffer(product.nftAddress, product.id, row.applicant)">Accept</button>
+            <button @click="acceptOffer(product.nftAddress, product.id, row.applicant)">
+              Accept
+            </button>
           </div>
         </div>
       </div>
@@ -80,6 +94,7 @@ import moment from 'moment'
 export default {
   name: 'AuctionOfferView',
   props: {
+    // eslint-disable-next-line
     product: {
       type: Object,
       require: true,
@@ -117,6 +132,7 @@ export default {
         type: String
       }
     },
+    // eslint-disable-next-line
     offers: {
       applicant: {
         type: String
@@ -145,9 +161,9 @@ export default {
     async acceptOffer (nftAddress, id, applicant) {
       this.showLoading()
       await this.acceptApplicantOffer({
-        nftAddress, 
+        nftAddress,
         id,
-        applicant 
+        applicant
       })
       this.$router.push('/')
       this.closeLoading()
@@ -156,7 +172,7 @@ export default {
     async cancelAuction (nftAddress, id) {
       this.showLoading()
       await this.closeAuction({
-        nftAddress, 
+        nftAddress,
         id
       })
       this.$router.push('/')

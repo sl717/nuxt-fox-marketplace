@@ -29,6 +29,7 @@
 export default {
   name: 'NFTMetadataView',
   props: {
+    // eslint-disable-next-line
     product: {
       type: Object,
       require: true,

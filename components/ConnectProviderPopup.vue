@@ -13,14 +13,12 @@
         <div class="metamask" @click="connectAccount('metamask')">
           <img class="wallet-icon" src="/img/providers/metamask.png" alt="">
           <span>Metamask</span>
-          
         </div>
       </div>
       <div class="metamask-wallet" @click="connectAccount('walletconnect')">
         <div class="metamask">
           <img class="wallet-icon" src="/img/providers/walletconnect.svg" alt="">
           <span>WalletConnect</span>
-          
         </div>
       </div>
     </el-dialog>

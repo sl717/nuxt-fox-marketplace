@@ -113,6 +113,7 @@ import Vue from 'vue'
 export default {
   name: 'ProductDetail',
   props: {
+    // eslint-disable-next-line
     product: {
       type: Object,
       require: true,

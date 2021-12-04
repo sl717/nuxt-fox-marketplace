@@ -15,15 +15,14 @@
           <span class="attribute-label">
             Price
           </span>
-          <span>  
-            <img class="price-symbol" src="/img/logos/logo.png" width="15px" alt=""> {{ Number(productData.startingPrice).toLocaleString() }}  
-          </span>       
+          <span>
+            <img class="price-symbol" src="/img/logos/logo.png" width="15px" alt=""> {{ Number(productData.startingPrice).toLocaleString() }}
+          </span>
         </p>
         <p class="product-attribute-quantity">
           <span class="attribute-label">
             This Auction will end in {{ leftDays( Number(productData.startedAt)+ Number(productData.duration)) }}
           </span>
-          
         </p>
       </div>
       <div v-else class="product-attribute">
@@ -31,9 +30,9 @@
           <span class="attribute-label">
             Price
           </span>
-          <span>  
-            <img class="price-symbol" src="/img/logos/logo.png" width="15px" alt=""> {{ Number(productData.price).toLocaleString() }}  
-          </span>       
+          <span>
+            <img class="price-symbol" src="/img/logos/logo.png" width="15px" alt=""> {{ Number(productData.price).toLocaleString() }}
+          </span>
         </p>
         <p class="product-attribute-quantity">
           <span class="attribute-label">
@@ -91,7 +90,7 @@ export default {
       },
       id: {
         type: Number
-      }, 
+      },
       startedAt: {
         type: Number
       },
@@ -151,7 +150,6 @@ export default {
 <style lang="scss" scoped>
     .product-item{
       height: 100%;
-      
         &-container{
             max-width: 350px;
             width: 100%;
@@ -162,18 +160,18 @@ export default {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             margin-bottom: 10px;
             h1{
-                color: black;
-                font-size: 20px;
+              color: black;
+              font-size: 20px;
             }
 
             .product-title{
-                font-size: 20px;
-                padding-bottom: 10px;
-                white-space: nowrap; 
-                width: 250px; 
-                overflow: hidden;
-                text-overflow: ellipsis; 
-                margin: auto;
+              font-size: 20px;
+              padding-bottom: 10px;
+              white-space: nowrap;
+              width: 250px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              margin: auto;
             }
             .product-img-container{
                 width: 300px;
@@ -197,9 +195,6 @@ export default {
                 max-width: none;
                 margin:0 -100%;
             }
-
-            
-
             .product-attribute{
                 display: flex;
                 justify-content: space-between;
@@ -242,9 +237,6 @@ export default {
             .product-attribute-label{
               font-size: 17px;
             }
-
-
-
             .product-purchase{
                 background-color: #e9950e;
                 border-radius: 5px;

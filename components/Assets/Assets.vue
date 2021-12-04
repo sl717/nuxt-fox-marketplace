@@ -45,15 +45,15 @@
         <div class="staking-container">
           <div class="staking-price">
             <p>Starting price:</p>
-            <b-input type="number" placeholder="0,00" v-model="auctionStartPrice"></b-input>
+            <b-input v-model="auctionStartPrice" type="number" placeholder="0,00" />
           </div>
           <div class="staking-price">
             <p>Ending price:</p>
-            <b-input type="number" placeholder="0,00" v-model="auctionEndPrice"></b-input>
+            <b-input v-model="auctionEndPrice" type="number" placeholder="0,00" />
           </div>
           <div class="staking-duration">
             <p>Duration(day):</p>
-            <b-input type="number" placeholder="0" v-model="auctionDuration"></b-input>
+            <b-input v-model="auctionDuration" type="number" placeholder="0" />
           </div>
           <div class="staking-btn-group">
             <button class="btn-staking cancel" @click="closeStakingPopup">
@@ -101,10 +101,10 @@ export default {
     loadingComponent.close()
   },
   methods: {
-    ...mapActions({ 
-                    getGenesis: 'genesis/getGenesis', 
-                    getAllNft: 'genesis/getNFTs', 
-                    getProducts: 'products/getProducts', 
+    ...mapActions({
+                    getGenesis: 'genesis/getGenesis',
+                    getAllNft: 'genesis/getNFTs',
+                    getProducts: 'products/getProducts',
                     connectToWallet: 'ethereum/connectToWallet',
                     setAcution: 'ethereum/setAuction'
                   }),
@@ -144,7 +144,7 @@ export default {
         this.showStakingPopup = false
         this.closeLoading()
       } else {
-        alert("You have to input the auction price and duration")
+        alert('You have to input the auction price and duration')
       }
     },
     closeStakingPopup () {
@@ -158,32 +158,27 @@ export default {
 .heroButtomButtons:hover {
   transform: scale(1.1);
 }
-
 .hero-body {
   margin-top: 50pt;
 }
-
 .flexheight {
   display: flex;
   flex-direction: row;
   align-items: stretch;
   min-height : 80vh;
 }
-
 .nft-fox-product{
   display: flex;
   justify-content: space-between;
   max-width: 90%;
   margin: auto;
 }
-
 .stake-table-wrap{
   color: #000;
 }
 p{
   color: #000;
 }
-
 .nft-img-container{
   height: 220px;
   width: 200px;
@@ -191,22 +186,18 @@ p{
   text-align: center;
   margin:0 auto;
 }
-
 .nft-asset-img{
   height: 220px;
   max-width: none;
   margin:0 -100%;
   width: auto;
 }
-
 .break-word {
   word-break: break-word;
 }
-
 .token-item{
   display: flex;
   margin-bottom: 50px;
-
   .token-index{
     display: flex;
     justify-content: center;
@@ -233,22 +224,18 @@ p{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     span{
       font-weight: 800;
     }
-
     .token-title{
       font-size: 18px;
       font-weight: 600;
     }
-
     .token-description{
       font-size: 15px;
       margin-top: 10px;
     }
   }
-
   .sell-btn{
     display: flex;
     justify-content: flex-end;
@@ -264,25 +251,18 @@ p{
       font-weight: 800;
       color: #73172d;
     }
-
     a:hover,
     a:focus {
       box-shadow: 0 0.5em 0.5em -0.4em #c97538;
       transform: translateY(-0.25em);
     }
   }
-
   @media (max-width: 780px) {
     flex-direction: column;
-    .token-image{
-
-    }
   }
 }
-
 .staking-container{
   width: 100%;
-
   .staking-price, .staking-duration{
     display: flex;
     flex-direction: column;
@@ -300,19 +280,16 @@ p{
       padding-left: 8px;
     }
   }
-
   .staking-btn-group{
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
-
     .cancel{
       border: solid 1px #f9a31b;
       height: 40px;
       padding: 10px;
       border-radius: 5px;
     }
-
     .staking{
       height: 40px;
       padding: 10px;
@@ -322,11 +299,8 @@ p{
       margin-left: 20px;
     }
   }
-  
   .el-icon-close{
     display: hidden;
   }
-
 }
-
 </style>

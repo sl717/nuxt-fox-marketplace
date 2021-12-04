@@ -4,7 +4,7 @@
     <div class="create-box">
       <p>Please input the metadata</p>
       <div class="metadata-form">
-        <input v-model="metadata" class="meta-input" v-bind:class="{'resError': isError }" placeholder="Enther or replace the meta URI" @change="metaChange()"></input>
+        <input v-model="metadata" class="meta-input" :class="{'resError': isError }" placeholder="Enther or replace the meta URI" @change="metaChange()"></input>
         <button class="check" @click="getJson()">
           <div v-if="!isError">
             <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,9 +25,13 @@
         <img :src="photo" alt="">
         <div class="meta-content">
           <p>Title</p>
-          <h3 class="title" v-html="title" />
+          <h3 class="title">
+            {{ title }}
+          </h3>
           <p>Description</p>
-          <h3 v-html="description" />
+          <h3>
+            {{ description }}
+          </h3>
         </div>
       </div>
       <div class="control-params">

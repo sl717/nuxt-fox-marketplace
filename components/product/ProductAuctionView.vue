@@ -57,6 +57,7 @@ import moment from 'moment'
 export default {
   name: 'ProductAuctionView',
   props: {
+    // eslint-disable-next-line
     product: {
       type: Object,
       require: true,
